@@ -14,11 +14,11 @@ export class ApiServiceService {
   }
 
   async getUser(id: number) {
-    return this.dbClient.send('fetch_user', JSON.stringify({ id }));
+    return this.dbClient.send('fetch_user', JSON.stringify({ id })).subscribe();
   }
 
   async getUsers() {
-    return this.dbClient.send('fetch_users', '');
+    return this.dbClient.send('fetch_users', '').subscribe();
   }
 
   async updateUser(id: number, user: UpdateUserDto) {
