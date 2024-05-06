@@ -1,24 +1,15 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "apps/kafka-idempotency/src",
+  "sourceRoot": "apps/api-service/src",
   "compilerOptions": {
     "deleteOutDir": true,
     "webpack": true,
-    "tsConfigPath": "apps/kafka-idempotency/tsconfig.app.json"
+    "tsConfigPath": "apps/api-service/tsconfig.app.json"
   },
   "monorepo": true,
-  "root": "apps/kafka-idempotency",
+  "root": "apps/api-service",
   "projects": {
-    "kafka-idempotency": {
-      "type": "application",
-      "root": "apps/kafka-idempotency",
-      "entryFile": "main",
-      "sourceRoot": "apps/kafka-idempotency/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/kafka-idempotency/tsconfig.app.json"
-      }
-    },
     "db-service": {
       "type": "application",
       "root": "apps/db-service",
