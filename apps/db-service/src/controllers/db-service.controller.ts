@@ -1,7 +1,7 @@
 import { Controller, ValidationPipe } from '@nestjs/common';
 import { DbServiceService } from '../services/db-service.service';
 import { EventPattern, MessagePattern, Payload } from '@nestjs/microservices';
-import { CreateUserDto } from 'libs/common/src/dto/user.create.dto';
+import { CreateUserDto } from 'libs/common/src/dto/create-user.dto';
 
 @Controller()
 export class DbServiceController {
@@ -18,7 +18,12 @@ export class DbServiceController {
   }
 
   @MessagePattern('fetch_users')
-  async fetchUsers(@Payload('id') id: number) {
-    return await this.dbServiceService.findAll(id);
+  async fetchUsers() {
+    return await this.dbServiceService.findAll();
+  }
+
+  @MessagePattern('fetch_users')
+  async fetchUsers() {
+    return await this.dbServiceService.findAll();
   }
 }

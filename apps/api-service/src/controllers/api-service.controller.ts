@@ -10,7 +10,8 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { ApiServiceService } from '../services/api-service.service';
-import { CreateUserDto } from 'libs/common/src/dto/user.create.dto';
+import { CreateUserDto } from 'libs/common/src/dto/create-user.dto';
+import { UpdateUserDto } from 'libs/common/src/dto/update-user.dto';
 
 @Controller()
 export class ApiServiceController {
@@ -22,8 +23,11 @@ export class ApiServiceController {
   }
 
   @Put(':id')
-  updateUser(@Param('id', new ParseIntPipe()) id: number) {
-    return this.apiServiceService.updateUser(id);
+  updateUser(
+    @Param('id', new ParseIntPipe()) id: number,
+    @Body(ValidationPipe) body: UpdateUserDto,
+  ) {
+    return this.apiServiceService.updateUser(id, body);
   }
 
   @Delete(':id')
