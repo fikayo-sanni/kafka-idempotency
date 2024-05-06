@@ -22,7 +22,7 @@ export class ApiServiceService {
   }
 
   async updateUser(id: number, user: UpdateUserDto) {
-    return this.dbClient.emit('update_user', JSON.stringify({ id, user }));
+    return this.dbClient.emit('update_user', JSON.stringify({ id, ...user }));
   }
 
   async deleteUser(id: number) {
