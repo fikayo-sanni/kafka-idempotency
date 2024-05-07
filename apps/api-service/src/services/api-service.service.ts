@@ -2,12 +2,12 @@ import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 import { CreateUserDto } from 'libs/common/src/dto/create-user.dto';
 import { UpdateUserDto } from 'libs/common/src/dto/update-user.dto';
-import { AppServiceUtils } from '../utils/api-service.utils';
+import { ApiServiceUtils } from '../utils/api-service.utils';
 @Injectable()
 export class ApiServiceService {
   constructor(
     @Inject('DB_SERVICE') private readonly dbClient: ClientKafka,
-    readonly utils: AppServiceUtils,
+    readonly utils: ApiServiceUtils,
     readonly logger: Logger,
   ) {}
 

@@ -1,11 +1,12 @@
 import { CreateUserDto } from '@app/common/dto/create-user.dto';
 import { UpdateUserDto } from '@app/common/dto/update-user.dto';
-import { Injectable, Logger } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { User } from 'libs/common/src/db/models/user.model';
 
 @Injectable()
 export class DbServiceService {
   constructor(
+    @Inject('USER_REPOSITORY')
     private readonly userModel: typeof User,
     private readonly logger: Logger,
   ) {}

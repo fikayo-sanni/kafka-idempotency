@@ -1,7 +1,8 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { ApiServiceController } from './controllers/api-service.controller';
 import { ApiServiceService } from './services/api-service.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { ApiServiceUtils } from './utils/api-service.utils';
 
 @Module({
   imports: [
@@ -22,6 +23,6 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     ]),
   ],
   controllers: [ApiServiceController],
-  providers: [ApiServiceService],
+  providers: [ApiServiceService, ApiServiceUtils, Logger],
 })
 export class ApiServiceModule {}
