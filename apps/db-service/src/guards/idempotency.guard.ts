@@ -8,17 +8,16 @@ export class IdempotencyGuard implements CanActivate {
   constructor(private readonly redisService: RedisService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const message = context.getArgs()[0].value; // Assuming the Kafka message is passed as the first argument
-    const messageId = message.msg_id; // Assuming the message has an ID
-
-    const isProcessed = await this.redisService.getValue(messageId);
+    let message = context.switchToRpc().getData();
+    const isProcessed = await this.redisService.getValue(message.id);
     if (isProcessed) {
       // Message has already been processed, return false to prevent further processing
       return false;
     }
 
     // Message has not been processed, mark it as processed in Redis and return true
-    await this.redisService.setValue(messageId, 'processed');
+    await this.redisService.setValue(message.id, 'processed');
+    message = message.message;
     return true;
   }
 }
