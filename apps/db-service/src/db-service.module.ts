@@ -6,10 +6,12 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { dbConfig } from '@app/common/db/config/db.config';
 import { SequelizeService } from '@app/common/db/db.service';
 import { User } from '@app/common/db/models/user.model';
+import { RedisModule } from '@app/common/redis/redis.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    RedisModule,
     SequelizeModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async () => ({
