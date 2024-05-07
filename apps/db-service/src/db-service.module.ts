@@ -7,6 +7,7 @@ import { dbConfig } from '@app/common/db/config/db.config';
 import { SequelizeService } from '@app/common/db/db.service';
 import { User } from '@app/common/db/models/user.model';
 import { RedisModule } from '@app/common/redis/redis.module';
+import { RedisService } from '@app/common/redis/redis.service';
 
 @Module({
   imports: [
@@ -22,6 +23,6 @@ import { RedisModule } from '@app/common/redis/redis.module';
     SequelizeModule.forFeature([User]),
   ],
   controllers: [DbServiceController],
-  providers: [DbServiceService, SequelizeService],
+  providers: [DbServiceService, SequelizeService, RedisService],
 })
 export class DbServiceModule {}
