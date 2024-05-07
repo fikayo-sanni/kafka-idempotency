@@ -20,7 +20,7 @@ export class DbServiceController {
 
   @MessagePattern('fetch_user')
   async fetchUser(@Payload('id') id: number) {
-    return await this.dbServiceService.findOne(id);
+    return await this.dbServiceService.findById(id);
   }
 
   @MessagePattern('fetch_users')
