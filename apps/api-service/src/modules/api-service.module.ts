@@ -1,8 +1,10 @@
 import { Logger, Module } from '@nestjs/common';
-import { ApiServiceController } from './controllers/api-service.controller';
-import { ApiServiceService } from './services/api-service.service';
+import { ApiServiceController } from '../controllers/api-service.controller';
+import { ApiServiceService } from '../services/api-service.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { ApiServiceUtils } from './utils/api-service.utils';
+import { ApiServiceUtils } from '../utils/api-service.utils';
+import { ApiRedisService } from '../../../../libs/common/src/redis/redis.service';
+import { ApiRedisModule } from '../../../../libs/common/src/redis/redis.module';
 
 @Module({
   imports: [
@@ -21,8 +23,9 @@ import { ApiServiceUtils } from './utils/api-service.utils';
         },
       },
     ]),
+    ApiRedisModule,
   ],
   controllers: [ApiServiceController],
-  providers: [ApiServiceService, ApiServiceUtils, Logger],
+  providers: [ApiServiceService, ApiServiceUtils, ApiRedisService, Logger],
 })
 export class ApiServiceModule {}

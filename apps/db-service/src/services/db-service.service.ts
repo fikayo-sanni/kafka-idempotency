@@ -12,7 +12,13 @@ export class DbServiceService {
   ) {}
 
   async create(data: CreateUserDto): Promise<User> {
-    return this.userModel.create({ ...data });
+    try {
+      return (await this.userModel.create({ ...data })).get({
+        plain: true,
+      });
+    } catch (e) {
+      throw e;
+    }
   }
 
   async findAll(): Promise<Array<User>> {
@@ -20,13 +26,19 @@ export class DbServiceService {
   }
 
   async findById(id: number): Promise<User> {
-    return this.userModel.findByPk(id);
+    const user = (await this.userModel.findByPk(id)).get({ plain: true });
+
+    return user;
   }
 
   async update(data: UpdateUserDto) {
-    const { id, ...user } = data;
-
-    return this.userModel.update(user, { where: { id } });
+    try {
+      const { id, ...user } = data;
+      this.userModel.update(user, { where: { id } });
+    } catch (e) {
+      this.logger.log(e);
+      throw e;
+    }
   }
 
   async delete(id: number): Promise<number> {

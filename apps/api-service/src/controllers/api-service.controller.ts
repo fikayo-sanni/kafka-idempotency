@@ -10,8 +10,8 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { ApiServiceService } from '../services/api-service.service';
-import { CreateUserDto } from 'libs/common/src/dto/create-user.dto';
-import { UpdateUserDto } from 'libs/common/src/dto/update-user.dto';
+import { CreateUserDto } from '../../../../libs/common/src/dto/create-user.dto';
+import { UpdateUserDto } from '../../../../libs/common/src/dto/update-user.dto';
 
 @Controller()
 export class ApiServiceController {

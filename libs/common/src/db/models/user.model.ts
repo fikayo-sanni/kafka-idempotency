@@ -1,10 +1,8 @@
-// user.model.ts
-
 import {
   Table,
   Column,
-  Model,
   PrimaryKey,
+  Model,
   AutoIncrement,
   CreatedAt,
   UpdatedAt,

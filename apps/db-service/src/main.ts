@@ -2,9 +2,10 @@ import { NestFactory } from '@nestjs/core';
 import { DbServiceModule } from './db-service.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { v4 as uuidv4 } from 'uuid';
+import * as dotenv from 'dotenv';
 
 async function bootstrap() {
-  // const app = await NestFactory.create(DbServiceModule);
+  dotenv.config();
 
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     DbServiceModule,
@@ -21,7 +22,6 @@ async function bootstrap() {
       },
     },
   );
-
   await app.listen();
 }
 bootstrap();

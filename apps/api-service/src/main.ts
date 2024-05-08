@@ -1,8 +1,10 @@
 import { NestFactory } from '@nestjs/core';
-import { ApiServiceModule } from './api-service.module';
+import * as dotenv from 'dotenv';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(ApiServiceModule);
-  await app.listen(3001);
+  dotenv.config();
+  const app = await NestFactory.create(AppModule);
+  await app.listen(3000);
 }
 bootstrap();

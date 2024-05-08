@@ -1,22 +1,27 @@
-// redis.module.ts
-
-import { Module } from '@nestjs/common';
-import { ClientRedis, ClientsModule, Transport } from '@nestjs/microservices';
+import { Logger, Module } from '@nestjs/common';
+import { ApiRedisService } from './redis.service';
+import { RedisModule, RedisModuleOptions } from '@liaoliaots/nestjs-redis';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    ClientsModule.register([
-      {
-        name: 'REDIS_CLIENT',
-        transport: Transport.REDIS,
-        options: {
-          host: 'redis',
-          port: 6379,
-        },
+    RedisModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async () => {
+        const moduleOptions: RedisModuleOptions = {
+          closeClient: true,
+          readyLog: true,
+          errorLog: true,
+          config: {
+            host: process.env.REDIS_HOST,
+            port: Number(process.env.REDIS_PORT),
+          },
+        };
+        return moduleOptions;
       },
-    ]),
+    }),
   ],
-  providers: [ClientRedis],
-  exports: [ClientsModule, ClientRedis],
+  providers: [ApiRedisService, Logger],
+  exports: [ApiRedisService],
 })
-export class RedisModule {}
+export class ApiRedisModule {}

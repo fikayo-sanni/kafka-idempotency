@@ -4,12 +4,14 @@ import {
   IsEmail,
   IsNotEmpty,
   IsNumber,
+  ValidateNested,
 } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class UpdateUserDto {
   @IsNumber()
-  @IsNotEmpty()
-  id: number;
+  @IsOptional()
+  id?: number;
 
   @IsString()
   @IsOptional()
@@ -22,4 +24,15 @@ export class UpdateUserDto {
   @IsEmail()
   @IsOptional()
   email?: string;
+}
+
+export class UpdateUserMessageDto {
+  @IsString()
+  @IsNotEmpty()
+  id: string;
+
+  @IsNotEmpty()
+  @ValidateNested()
+  @Type(() => UpdateUserDto)
+  message: UpdateUserDto;
 }

@@ -1,4 +1,5 @@
-import { IsString, IsNotEmpty, IsEmail } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsString, IsNotEmpty, IsEmail, ValidateNested } from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
@@ -12,4 +13,14 @@ export class CreateUserDto {
   @IsEmail()
   @IsNotEmpty()
   email: string;
+}
+export class CreateUserMessageDto {
+  @IsString()
+  @IsNotEmpty()
+  id: string;
+
+  @IsNotEmpty()
+  @ValidateNested()
+  @Type(() => CreateUserDto)
+  message: CreateUserDto;
 }
