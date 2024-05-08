@@ -3,10 +3,6 @@ import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { CreateUserDto } from '@app/common/dto/create-user.dto';
 import { UpdateUserDto } from '@app/common/dto/update-user.dto';
-import { ApiServiceModule } from '../src/modules/api-service.module';
-import { Consumer } from 'kafkajs';
-import { ApiRedisService } from '../../../libs/common/src/redis/redis.service';
-import { ClientsModule } from '@nestjs/microservices';
 import { AppModule } from '../src/app.module';
 
 describe('ApiServiceControllerE2E', () => {
