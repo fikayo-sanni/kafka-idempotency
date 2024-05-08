@@ -6,7 +6,7 @@ then
 
 run `docker compose up`
 
-App would run on https://localhost:3000
+App would run on http://localhost:3000
 
 
 Postman Docs
